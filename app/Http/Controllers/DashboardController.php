@@ -10,7 +10,7 @@ class DashboardController extends Controller
     public function getCity($id)
     {
         $res = DB::table('states')
-        ->join('l_g_a_s','states.id','=','l_g_a_s.state_id')
+        ->join('l_g_a_s','states.id','=','l_g_a_s.state')
         ->where('states.id', $id)
         ->get();
         return response()->json($res);

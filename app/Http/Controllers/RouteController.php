@@ -55,6 +55,7 @@ class RouteController extends Controller
          * "destination_lga_id" => "370"
          * "departure_date" => "2021-10-21"
          */
+        // dd($request);
 
         $route = Route::where([
             ['location_lga_id', $request->origin_lga_id],
@@ -64,7 +65,9 @@ class RouteController extends Controller
         ])->first();
 
         $available_vehicles = Flight::where('route_id', $route->id)->get();
-        // dd($available_vehcles);
+        if ($available_vehicles == null) {
+            return redirect()->route('home');
+        }
         return view('pages.client.available-routes', ['available_vehicles' => $available_vehicles, 'route' => $route]);
     }
 
