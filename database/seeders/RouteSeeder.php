@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Route;
 use Illuminate\Database\Seeder;
 
 class RouteSeeder extends Seeder
@@ -13,6 +14,6 @@ class RouteSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Route::factory()->count(10)->create();
     }
 }

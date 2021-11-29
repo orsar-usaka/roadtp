@@ -22,7 +22,11 @@ class StationFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->words(3, true),
+            'address' => $this->faker->address(),
+            'lga_id' => $this->faker->numberBetween(526, 538),
+            'state_id' => 26,
+            'description' => $this->faker->sentence(5),
         ];
     }
 }

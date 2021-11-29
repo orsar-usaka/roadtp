@@ -22,7 +22,13 @@ class VehicleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->words(3, true),
+            'model' => $this->faker->numerify('BTS-####'),
+            'plate_no' => $this->faker->numerify('TL-####'),
+            'vehicle_no' => $this->faker->numerify('BEN-##-####'),
+            'seat_capacity' => $this->faker->numberBetween(5,15),
+            'fuel_capacity' => $this->faker->numberBetween(50,100),
+            'description' => $this->faker->sentence(6),
         ];
     }
 }

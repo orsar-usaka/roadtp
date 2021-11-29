@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Station;
 use Illuminate\Database\Seeder;
 
 class StationSeeder extends Seeder
@@ -13,6 +14,6 @@ class StationSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Station::factory()->count(10)->create();
     }
 }
