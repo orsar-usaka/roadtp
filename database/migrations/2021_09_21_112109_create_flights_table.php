@@ -18,8 +18,8 @@ class CreateFlightsTable extends Migration
             $table->string('name')->nullable();
             $table->integer('vehicle_id')->nullable();
             $table->integer('route_id')->nullable();
-            $table->integer('take_off_time')->nullable();
-            $table->date('booked_seats')->nullable();
+            $table->date('take_off_time')->nullable();
+            $table->integer('booked_seats')->nullable();
             $table->integer('is_cancelled')->nullable();
             $table->integer('is_postponed')->nullable();
             $table->integer('is_unavailable')->nullable();
