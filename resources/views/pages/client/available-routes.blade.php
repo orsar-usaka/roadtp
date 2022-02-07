@@ -40,7 +40,7 @@
                         <table class="table table-shopping">
                             <thead>
                                 <tr>
-                                    <th class="text-center"></th>
+                                    <th class="text-center">#</th>
                                     <th>Service</th>
                                     <th class="text-center">Vehicle Type</th>
                                     <th class="text-right">Departure</th>
@@ -53,8 +53,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($available_vehicles as $available_vehicle)
+                                @forelse ($available_vehicles as $key => $available_vehicle)
                                 <tr>
+                                  <td>{{++$key}}</td>
                                     <td>
                                         <div class="img-container">
                                             <img src="https://images.thenorthface.com/is/image/TheNorthFace/NF0A2VFL_619_hero" alt="...">
@@ -80,14 +81,14 @@
                                         8
                                     </td>
                                     <td class="td-number">
-                                        <p id="clicks"></p>
+                                        <p id="clicks_{{ $key }}">1</p>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-round btn-info btn-sm" onClick="minus()"> <i class="material-icons">remove</i> </button>
-                                            <button type="button" class="btn btn-round btn-info btn-sm" onClick="plus()"> <i class="material-icons">add</i> </button>
+                                            <button type="button" class="btn btn-round btn-info btn-sm" onClick="minus( {{ $key }}, {{ $available_vehicle->id }}, {{ $available_vehicle->price }} )"> <i class="material-icons">remove</i> </button>
+                                            <button type="button" class="btn btn-round btn-info btn-sm" onClick="plus( {{ $key }}, {{ $available_vehicle->id }}, {{ $available_vehicle->price }} )"> <i class="material-icons">add</i> </button>
                                         </div>
                                     </td>
-                                    <td class="td-number">
-                                        <small>N</small>{{$available_vehicle->price}}
+                                    <td class="td-number" >
+                                        <small>N</small><p  id="{{$available_vehicle->id}}"> {{$available_vehicle->price}}</p>
                                     </td>
                                     <td class="td-actions">
                                         <button type="button" rel="tooltip" data-placement="left" title="Remove item" class="btn btn-simple">
@@ -183,17 +184,33 @@
 
 @section('datepicker')
     <script>
-        var clicks = 1;
-        document.getElementById("clicks").innerText = clicks;
-        function plus() {
+        
+        function plus(ticket_no, price_id, price) {
+            let clicks = Number(document.getElementById(`clicks_${ticket_no}`).innerText);
             clicks += 1;
-            document.getElementById("clicks").innerText = clicks;
+            console.log(`clicks are ${clicks}`);
+            document.getElementById(`clicks_${ticket_no}`).innerText = clicks;
+            console.log(ticket_no);
+            console.log(price_id);
+            amount = Number(document.getElementById(price_id).innerText)
+            console.log(amount);
+            document.getElementById(price_id).innerText = clicks * price
+
         };
 
-        function minus() {
+        function minus(ticket_no, price_id, price) {
+            let clicks = Number(document.getElementById(`clicks_${ticket_no}`).innerText);
+            console.log(`clicks are ${clicks}`);
             if (clicks != 1) {
                 clicks -= 1;
-                document.getElementById("clicks").innerText = clicks;
+
+                document.getElementById(`clicks_${ticket_no}`).innerText = clicks;
+                console.log(ticket_no);
+                console.log(price_id);
+                amount = Number(document.getElementById(price_id).innerText)
+                console.log(amount);
+                document.getElementById(price_id).innerText = clicks * price
+
             }else{
                 return
             }
